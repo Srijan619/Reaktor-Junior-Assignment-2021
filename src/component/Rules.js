@@ -56,13 +56,16 @@ const Rules = () => {
             <h1>Rules</h1>
             <input type="text" name="search" placeholder="Serach by text...." onChange={onhandleChange} />
             <h3>{currentChapter}</h3>
-            <ul>
+            <ol>
             {filterText.length>0 ? filterText.map(rule => {
                 return (
-                     <p key={rule}>{rule}</p>
+                    <div key={rule}>
+                       <a href="">{rule.substr(0,rule.indexOf(' '))}</a>
+                       <p >{rule.substr(rule.indexOf(' '))}</p>
+                     </div>
                      )
             }) : <p>No rules found.....</p>}
-            </ul>
+            </ol>
 
         </div>
     );
