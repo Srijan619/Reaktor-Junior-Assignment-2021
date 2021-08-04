@@ -3,15 +3,13 @@ import { useLocation } from "react-router";
 
 const Rules = () => {
     const location = useLocation();
-    const allRules = location.state.slicedData.slicedRules
+    const allRules = location.state.slicedData.slicedRules // get all rules from the location-router
+    const currentChapter = location.state.chapters // set current chapter from locaton
 
-
-    const currentChapter = location.state.chapters
-
-    let resultRules = allRules.filter(obj => {
+    let resultRules = allRules.filter(obj => { //To filter rules based on the chapters
         return (obj.chapter === currentChapter)
     })
-    const [filterText, setFilterText] = useState([])
+    const [filterText, setFilterText] = useState([]) 
     const [searchKeyWord, setSearchKeyWord] = useState('');
 
     useEffect(() => {
@@ -19,7 +17,7 @@ const Rules = () => {
         handleSearch(searchKeyWord)
     }, [searchKeyWord]) // eslint-disable-line react-hooks/exhaustive-deps
 
-    const destructureObject = (array) => {
+    const destructureObject = (array) => {  //Function to destructure object to array
         let pushA = [];
         array.forEach(rules => {
             rules.rule.forEach(rule => {
@@ -28,25 +26,25 @@ const Rules = () => {
         })
         return pushA
     }
-    const onhandleChange=(e)=>{
+    const onhandleChange=(e)=>{  //Handle key input
         setSearchKeyWord(e.target.value)
     }
     const handleSearch = (text) => {
-        const delayDebounceFn = setTimeout(() => {
+        const delayDebounceFn = setTimeout(() => { //Delay after each text input
             searchTextInArray(text)
         }, 1000)
 
         return () => clearTimeout(delayDebounceFn)
     }
 
-    const searchTextInArray = (text) => {
-        if(!text)setFilterText(destructureObject(resultRules))
+    const searchTextInArray = (text) => { //Function to search text in array
+        if(!text)setFilterText(destructureObject(resultRules)) //If no  text input, sets state to original rules
         else{
-            const cpArray = destructureObject(resultRules)
-            const newArray = cpArray.filter(rule => {
+            const cpArray = destructureObject(resultRules) 
+            const newArray = cpArray.filter(rule => { //Filters according to the text input
                 return rule.toLowerCase().includes(text.toLowerCase())
             })
-            setFilterText(newArray)
+            setFilterText(newArray) //sets state to according to input
         }
 
     }
