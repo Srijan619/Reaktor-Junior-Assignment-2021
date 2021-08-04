@@ -17,3 +17,8 @@ li:hover{
 li{
   margin: 2%;
 }
+
+.Link{
+  color:blue;
+  text-decoration: underline;
+}

@@ -60,7 +60,7 @@ const Rules = () => {
             {filterText.length>0 ? filterText.map(rule => {
                 return (
                     <div key={rule}>
-                       <a href="">{rule.substr(0,rule.indexOf(' '))}</a>
+                       <p className="Link" href="">{rule.substr(0,rule.indexOf(' '))}</p>
                        <p >{rule.substr(rule.indexOf(' '))}</p>
                      </div>
                      )
